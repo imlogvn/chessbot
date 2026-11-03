@@ -1,21 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>chessbot.cc</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chessbot.cc</title>
+<style>
+  :root {
+    --bg: #f3efe6;
+    --ink: #22201c;
+    --muted: #6b665c;
+    --dark-sq: #5f7f4f;
+    --light-sq: #ebecd0;
+    --card: #fffdf8;
+    --line: #d9d3c4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1f1e1b;
+      --ink: #f0ece2;
+      --muted: #a29d90;
+      --card: #292824;
+      --line: #3a3832;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 Georgia, "Times New Roman", serif;
+  }
+  .strip {
+    height: 32px;
+    background:
+      repeating-conic-gradient(var(--dark-sq) 0 25%, var(--light-sq) 0 50%) 0 0 / 64px 64px;
+  }
+  main { max-width: 680px; margin: 0 auto; padding: 48px 20px 80px; }
+  h1 { font-size: 2.6rem; line-height: 1.1; margin: 0 0 8px; }
+  .tag { color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 1.4rem; margin: 48px 0 12px; }
+  p { max-width: 62ch; }
+  .release {
+    display: flex; gap: 16px; align-items: center; justify-content: space-between;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 6px; padding: 14px 18px; margin-bottom: 12px;
+  }
+  .release strong { font-size: 1.1rem; }
+  .release small { display: block; color: var(--muted); font-size: .85rem; }
+  .release a {
+    background: var(--dark-sq); color: #fff; text-decoration: none;
+    padding: 8px 16px; border-radius: 4px;
+    font: 600 .9rem system-ui, sans-serif; white-space: nowrap;
+  }
+  .release a:hover { filter: brightness(1.1); }
+  a:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  .note { font-size: .85rem; color: var(--muted); margin-top: 40px; }
+  .empty { color: var(--muted); }
+</style>
 </head>
+<body>
+<div class="strip" aria-hidden="true"></div>
+<main>
+  <h1>Best Move</h1>
+  <p class="tag">A chess app that tells you where to move.</p>
 
-<p>Hi</p>
+  <h2>Downloads</h2>
+  <div id="releases"></div>
 
+  <h2>About</h2>
+  <p>chess.cc is an app that looks at your chess position and tells you where to move next. It aims for the strongest move every turn, with accuracy in the 90s.</p>
+  <p>I built it to guide my chess skills and learning pathway.</p>
+
+  <p class="note">Use it for analysis and practice. Many chess sites ban engine help in live games, so don't use it there.</p>
+</main>
+
+<script>
+
+  const RELEASES = [
+    { version: "v1.0", date: "2026-10-20", notes: "First release",             file: "downloads/v1.0.zip" },
+  ];
+  /* =============================================== */
+
+  const box = document.getElementById("releases");
+  if (!RELEASES.length) {
+    box.innerHTML = '<p class="empty">No downloads yet.</p>';
+  }
+  RELEASES.forEach(r => {
+    const row = document.createElement("div");
+    row.className = "release";
+    const info = document.createElement("div");
+    const name = document.createElement("strong");
+    name.textContent = r.version;
+    const meta = document.createElement("small");
+    meta.textContent = [r.date, r.notes].filter(Boolean).join(" – ");
+    info.append(name, meta);
+    const a = document.createElement("a");
+    a.href = r.file;
+    a.setAttribute("download", "");
+    a.textContent = "Download .zip";
+    row.append(info, a);
+    box.append(row);
+  });
+</script>
+</body>
 </html>
