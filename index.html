@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>chessbot.cc</title>
+<title>Best Move – Chess Move Helper</title>
 <style>
   :root {
     --bg: #f3efe6;
@@ -67,19 +67,20 @@
   <h2>Downloads</h2>
   <div id="releases"></div>
 
-  <h2>About</h2>
-  <p>chess.cc is an app that looks at your chess position and tells you where to move next. It aims for the strongest move every turn, with accuracy in the 90s.</p>
-  <p>I built it to guide my chess skills and learning pathway.</p>
+  <h2>About me</h2>
+  <p>Best Move is an app that looks at your chess position and tells you where to move next. It aims for the strongest move every turn, with game-review accuracy in the 90s.</p>
+  <p>I built it to learn from my own games and to practice, and I keep adding versions as it improves.</p>
 
-  <p class="note">chessbot.cc</p>
+  <p class="note">Use it for analysis and practice. Many chess sites ban engine help in live games, so don't use it there.</p>
 </main>
 
 <script>
-
+  /* ============ ADD NEW VERSIONS HERE (newest first) ============ */
   const RELEASES = [
-    { version: "v1.1", date: "2026-11-3", notes: "Added an overlay and audio feature", file: "downloads/chessbot-v1.1.zip" },
-    { version: "v1.0", date: "2026-11-2", notes: "First release", file: "downloads/chessbot-v1.0.zip" },
+    { version: "v1.1", date: "2026-11-3", notes: "Added an overlay and audio feature", link: "https://drive.google.com/uc?export=download&id=1pAVz8c-Fv3RLj-_9R1gF5ublgXjMHR7w" },
+    { version: "v1.0", date: "2026-11-2", notes: "First release", link: "https://drive.google.com/uc?export=download&id=1ZF8aRpp8YbRV9i64E9AkogoJULsp9mYO" },
   ];
+  /* =============================================================== */
 
   const box = document.getElementById("releases");
   if (!RELEASES.length) {
@@ -95,8 +96,8 @@
     meta.textContent = [r.date, r.notes].filter(Boolean).join(" – ");
     info.append(name, meta);
     const a = document.createElement("a");
-    a.href = r.file;
-    a.setAttribute("download", "");
+    a.href = r.link;
+    a.rel = "noopener";
     a.textContent = "Download .zip";
     row.append(info, a);
     box.append(row);
@@ -104,3 +105,4 @@
 </script>
 </body>
 </html>
+```[cite: 1]
